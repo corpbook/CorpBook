@@ -43,6 +43,19 @@ const TaskController = {
     })
     //res.send(res.locals.doc);
    },
+
+   getAllUsers(req, res, next) {
+  
+    User.find({}, (err, doc) => {
+      if (err || !doc[0]) {
+        next('Cannot get user');
+      } else {
+        res.locals.doc = doc;
+        next();
+      }
+    })
+    //res.send(res.locals.doc);
+   },
   
   changeUser(req, res, next) {
     const { name } = req.params;

@@ -66,6 +66,10 @@ userRouter.get('/:name', taskController.getUser, (req, res) => {
   res.status(200).json(res.locals.doc)
 });
 
+userRouter.get('/', taskController.getAllUsers, (req, res) => {
+  res.status(200).json(res.locals.doc)
+});
+
 userRouter.patch('/:name', taskController.changeUser, (req, res) => {
   res.status(200).end();
 })

@@ -35,7 +35,14 @@
     "js-cookie": "^2.2.0",
     "mongodb": "^3.3.0-beta2",
     "mongoose": "^5.6.8",
+<<<<<<< HEAD
+    "bootstrap": "^4.3.1",
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 9a8ecd12199bf668747187853a073deb2ad447e2
     "node-fetch": "^2.6.0",
+>>>>>>> 77cc31a1562d0845f477ef400d4dc6283e4cdb4d
     "node-sass": "^4.12.0",
     "prop-types": "^15.6.1",
     "querystring": "^0.2.0",
