@@ -30,10 +30,22 @@ const TaskController = {
     })
   },
 
+  // getUser(req, res, next) {
+  //   const { name } = req.params;
+
+  //   User.find({ firstName: name }, (err, doc) => {
+  //     if (err || !doc[0]) {
+  //       next('Cannot get user');
+  //     } else {
+  //       res.locals.doc = doc;
+  //       next();
+  //     }
+  //   })
+  //   //res.send(res.locals.doc);
+  //  },
   getUser(req, res, next) {
     const { name } = req.params;
-
-    User.find({ firstName: name }, (err, doc) => {
+    User.find({ id: name }, (err, doc) => {
       if (err || !doc[0]) {
         next('Cannot get user');
       } else {

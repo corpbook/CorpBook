@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import './CreateProfile.css';
-
-let profileData;  
+import Cookies from 'js-cookie';
+let profileData; 
+let id = Cookies.get('userId');
     class CreateProfile extends Component{
         
     
@@ -36,22 +37,40 @@ let profileData;
             this.props.createProfleFunction()
             event.preventDefault();
         }
-        componentDidMount(){
-            fetch('/user/Jimmy', {
-                method:'GET',
-                accept: 'application/json',
-                headers:{'Content-Type': 'application/json'}
-            }).then(response=>{
-               // console.log(response)
-                return response.json();
-            }).then(data=>{
-                profileData = data;
-                this.setState({fName:profileData[0].firstName, 
-                lName:profileData[0].lastName,
-                url:profileData[0].imageURL
-                })
-                return data}) 
-            }
+        // componentDidMount(){
+        //     fetch('/user/Jimmy', {
+        //         method:'GET',
+        //         accept: 'application/json',
+        //         headers:{'Content-Type': 'application/json'}
+        //     }).then(response=>{
+        //        // console.log(response)
+        //         return response.json();
+        //     }).then(data=>{
+        //         profileData = data;
+        //         this.setState({fName:profileData[0].firstName, 
+        //         lName:profileData[0].lastName,
+        //         url:profileData[0].imageURL
+        //         })
+        //         return data}) 
+
+        //    }
+componentDidMount(){
+    fetch(`/user/${id}`, {
+        method:'GET',
+        accept: 'application/json',
+        headers:{'Content-Type': 'application/json'},
+    }).then(response=>{
+       // console.log(response)
+        return response.json();
+    }).then(data=>{
+        profileData = data;
+        console.log('PROFILE DATA ---------------', profileData)
+        this.setState({fName:profileData[0].firstName,
+        lName:profileData[0].lastName,
+        url:profileData[0].imageURL
+        })
+        return data})
+    }
     render(){
         return(
         <div className='ba ph0 mh0 bg-light-blue tc' id = 'submitform'>
