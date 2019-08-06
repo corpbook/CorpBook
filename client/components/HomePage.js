@@ -37,6 +37,20 @@ class HomePage extends Component{
     onSearchCompany = (event) =>{
         this.setState({searchFieldCompany:event.target.value})
    }
+
+//    componentDidMount(){
+//     fetch('/user/all', {
+//         method:'GET',
+//         accept: 'application/json',
+//         headers:{'Content-Type': 'application/json'}
+//     }).then(response=>{
+//         return response.json();
+//     }).then(data=>{
+//         this.setState({profiles:profileData})
+//         return data}) 
+//     }
+
+
     render(){
         //each card will have props that will b passed down
         //test data
@@ -63,7 +77,7 @@ class HomePage extends Component{
             //tc is text center
             console.log(cardsDisplay);
             return(
-               <div className='bg-silver tc'> 
+               <div className='bg-silver tc h-100'> 
                 <h1>LinkedIn Files </h1>
                 <SearchBox searchChange={this.onSearchName} placeholder={'name'}/>
                 <SearchBox searchChange={this.onSearchCompany} placeholder={'Company'}/>
