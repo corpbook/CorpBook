@@ -18,7 +18,7 @@ const profiles = [
     
 ]
 
-
+let dankData;
 class HomePage extends Component{
     constructor(props){
         super(props);
@@ -28,7 +28,8 @@ class HomePage extends Component{
             searchFieldCompany:'',
             names:names,
             company:companies,
-            profiles:profiles,
+            profiles:[],
+            //profiles:null,
         }
     }
     onSearchName = (event) =>{
@@ -37,36 +38,49 @@ class HomePage extends Component{
     onSearchCompany = (event) =>{
         this.setState({searchFieldCompany:event.target.value})
    }
-
-//    componentDidMount(){
-//     fetch('/user/all', {
-//         method:'GET',
-//         accept: 'application/json',
-//         headers:{'Content-Type': 'application/json'}
-//     }).then(response=>{
-//         return response.json();
-//     }).then(data=>{
-//         this.setState({profiles:profileData})
-//         return data}) 
-//     }
+   mount = () =>{
+       
+   }
+   componentDidMount(){
+    fetch('/user', {
+        method:'GET',
+        accept: 'application/json',
+        headers:{'Content-Type': 'application/json'}
+    }).then(response=>{
+        return response.json();
+    }).then(data=>{
+         dankData = [...data]
+         console.log(dankData);
+         console.log(data[0].firstName)
+         this.setState({profiles:dankData});
+         console.log('I am afte setstate') 
+         console.log(this.state.profiles)
+        return data}) 
+}
 
 
     render(){
+        console.log('-----------State profiles-------')
+        console.log(this.state.profiles);
         //each card will have props that will b passed down
         //test data
-        
+            // const filterProfiles = this.state.profiles.filter(el=>{        
+            //     return (el.name.toLowerCase().includes(this.state.searchFieldName.toLowerCase())
+            //      && el.company.toLowerCase().includes(this.state.searchFieldCompany.toLowerCase()))
+            // })
             const filterProfiles = this.state.profiles.filter(el=>{        
-                return (el.name.toLowerCase().includes(this.state.searchFieldName.toLowerCase())
-                 && el.company.toLowerCase().includes(this.state.searchFieldCompany.toLowerCase()))
-            })
-                
+                return (el.firstName.toLowerCase().includes(this.state.searchFieldName.toLowerCase())
+                 && el.lastName.toLowerCase().includes(this.state.searchFieldCompany.toLowerCase()))
+            })  
             const cardsDisplay = [];
                 
             for(let i = 0; i < filterProfiles.length; i++){
                 cardsDisplay.push(<Card id = {i} key = {i} 
-                name={filterProfiles[i].name} 
-                url={filterProfiles[i].url}  
-                company={filterProfiles[i].company}      
+                name={filterProfiles[i].firstName}
+                name2={filterProfiles[i].lastName} 
+                url={filterProfiles[i].imageURL}  
+                company={filterProfiles[i].pastCompanies}
+                curPos ={filterProfiles[i].currentPosition}                    
             />
             )
         }
@@ -75,9 +89,9 @@ class HomePage extends Component{
         //<Card id = {}, key = {}/> 
         if(this.state.username){
             //tc is text center
-            console.log(cardsDisplay);
+            //console.log(cardsDisplay);
             return(
-               <div className='bg-silver tc h-100'> 
+               <div id='renderPage' className='bg-silver tc '> 
                 <h1>LinkedIn Files </h1>
                 <SearchBox searchChange={this.onSearchName} placeholder={'name'}/>
                 <SearchBox searchChange={this.onSearchCompany} placeholder={'Company'}/>

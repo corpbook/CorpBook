@@ -97,6 +97,8 @@ authenticate(req, res, next) {
             console.log('------------- API fetch request')
             console.log(imageURL)
             res.locals.doc.imageURL = imageURL;
+
+res.cookie("userId", res.locals.doc.id);
             return next();
             }).catch(err=>{
                 console.log("Error fetching user information from LinkedIn", err)

@@ -71,7 +71,7 @@ class App extends Component {
         /*Working on only */
         // return(
         //     <div className="App bg-light-yellow">
-        //         <CreateProfile profileData={profileData}/>
+        //         <HomePage/>
         //     </div>
         // )
     }
